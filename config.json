@@ -1,0 +1,5 @@
+{
+    "DATABASE_URL": "postgresql://postgres:david1997@localhost:5432/postgres",
+    "SECRET_KEY": "L9nDcCysxYJTZAF",
+    "DEBUG": true
+}
