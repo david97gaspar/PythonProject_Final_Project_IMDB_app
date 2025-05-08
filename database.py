@@ -14,11 +14,4 @@ def set_search_path(conn, schema="final_project"):
     conn.commit()
     cur.close()
 
-if __name__=="__main__":
-    conn = get_db_connection()
-    set_search_path(conn)
-    cur = conn.cursor()
-    cur.execute("SHOW search_path;")
-    print("search_path:", cur.fetchone())
-    cur.close()
-    conn.close()
+

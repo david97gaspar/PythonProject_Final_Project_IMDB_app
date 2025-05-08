@@ -4,17 +4,6 @@ from database import get_db_connection, set_search_path
 with open("config.json","r") as f:
     cfg = json.load(f)
 
-def create_user_table():
-    conn = get_db_connection(); set_search_path(conn)
-    cur = conn.cursor()
-    cur.execute("""
-      CREATE TABLE IF NOT EXISTS users (
-        id SERIAL PRIMARY KEY,
-        username VARCHAR(255) UNIQUE NOT NULL,
-        password_hash VARCHAR(255) NOT NULL
-      );
-    """)
-    conn.commit(); cur.close(); conn.close()
 
 def register_user(username, password):
     pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
@@ -40,7 +29,4 @@ def login_user(username, password):
     uid, pw_hash = row
     return uid if bcrypt.checkpw(password.encode(), pw_hash.encode()) else None
 
-if __name__=="__main__":
-    create_user_table()
-    print(register_user("alice","pass123"))
-    print(login_user("alice","pass123"))
+
