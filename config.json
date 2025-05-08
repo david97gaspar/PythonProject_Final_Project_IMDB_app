@@ -1,5 +1,6 @@
 {
     "DATABASE_URL": "postgresql://postgres:david1997@localhost:5432/postgres",
     "SECRET_KEY": "L9nDcCysxYJTZAF",
+    "OMDB_API_KEY": "8b774660",
     "DEBUG": true
 }
