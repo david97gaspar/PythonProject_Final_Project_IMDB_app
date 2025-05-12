@@ -1,3 +1,5 @@
 gradio == 5.24.0
 psycopg2 == 2.9.10
 bcrypt == 4.3.0
+requests == 2.32.3
+beautifulsoup4 ==4.13.4
