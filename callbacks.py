@@ -5,6 +5,7 @@ from user_data import get_user_watchlist, get_user_ratings
 from database import get_db_connection as _get_conn, set_search_path
 from movies import  get_distinct_genres, get_movies_by_genre
 
+
 def insert_rating(user_id, movie_id, rating):
 
     conn = _get_conn(); set_search_path(conn)
