@@ -6,19 +6,32 @@ with open("config.json","r") as f:
 
 
 def register_user(username, password):
+
+    if len(password) < 5:
+        return "⚠️ Password must be at least 5 characters long."
+
+
     pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
-    conn = get_db_connection(); set_search_path(conn)
+    conn = get_db_connection()
+    set_search_path(conn)
     cur = conn.cursor()
+
     try:
-        cur.execute(
-          "INSERT INTO users (username,password_hash) VALUES (%s,%s);",
-          (username,pw_hash)
-        )
-        conn.commit(); msg="✅ User created!"
+        cur.execute("""
+            INSERT INTO users (username, password_hash) 
+            VALUES (%s, %s);
+        """, (username, pw_hash))
+        conn.commit()
+        msg = "✅ User created!"
     except psycopg2.IntegrityError:
-        conn.rollback(); msg="⚠️ Username already exists."
-    cur.close(); conn.close()
+        conn.rollback()
+        msg = "⚠️ Username already exists."
+    finally:
+        cur.close()
+        conn.close()
+
     return msg
+
 
 def login_user(username, password):
     conn = get_db_connection(); set_search_path(conn)
